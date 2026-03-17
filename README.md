@@ -10,7 +10,7 @@ PorthMath is a tiny collection of integer-focused helpers for [tsoding’s Porth
 - `lcm int int -- int` – least common multiple (zero when either argument is zero).
 - `pow int int -- int` – exponentiation with non-negative exponents.
 - `factorial int -- int` – factorial for `n ≥ 0` (returns `0` for negative inputs).
-- `is-prime int -- bool` – simple trial-division primer (returns `true` for `2`, `false` for `n < 2`).
+*Prime checking is planned but removed for now because it was difficult to balance the stack cleanly. Contributions welcome.*
 
 Each proc is defined with clear stack signatures so you can read the code as documentation.
 

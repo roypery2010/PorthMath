@@ -17,6 +17,4 @@ proc main in
   "sign(-7) = " puts
   -7 sign puti "\n" puts
 
-  "is-prime(97) = " puts
-  97 is-prime putu "\n" puts
 end
