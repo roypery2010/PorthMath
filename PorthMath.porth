@@ -92,14 +92,14 @@ end
 
 // Helper used by is-prime -- tests divisors from the current value upward.
 proc is-prime-step int int -- bool in
-  peek n divisor in
+  let divisor n in
     divisor
     divisor
     *
     n
     >
     if
-      drop drop true
+      true
     else
       n
       divisor
@@ -107,11 +107,10 @@ proc is-prime-step int int -- bool in
       0
       =
       if
-        drop drop false
+        false
       else
-        swap
+        n
         divisor 1 +
-        swap
         is-prime-step
       end
     end
@@ -125,7 +124,7 @@ proc is-prime int -- bool in
   if
     drop false
   else
-    2 swap
+    2
     is-prime-step
   end
 end
