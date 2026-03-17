@@ -1,0 +1,22 @@
+include "std.porth"
+include "../PorthMath.porth"
+
+proc main in
+  "gcd(48, 180) = " puts
+  48 180 gcd putu "\n" puts
+
+  "lcm(14, 35) = " puts
+  14 35 lcm putu "\n" puts
+
+  "3^4 = " puts
+  3 4 pow putu "\n" puts
+
+  "5! = " puts
+  5 factorial putu "\n" puts
+
+  "sign(-7) = " puts
+  -7 sign puti "\n" puts
+
+  "is-prime(97) = " puts
+  97 is-prime putu "\n" puts
+end

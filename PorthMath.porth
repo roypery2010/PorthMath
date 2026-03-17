@@ -1,0 +1,133 @@
+// PorthMath -- a small collection of integer math helpers for Porth.
+// Designed to be included alongside std.porth without imposing extra runtime
+// requirements except the standard stack-building intrinsics.
+
+// Absolute value
+proc abs int -- int in
+  dup 0 < if
+    0 swap -
+  end
+end
+
+// Sign of an integer (-1, 0, or 1)
+proc sign int -- int in
+  dup 0 > if
+    drop 1
+  else
+    dup 0 = if
+      drop 0
+    else
+      drop -1
+    end
+  end
+end
+
+// Greatest common divisor using the subtraction-free Euclidean step.
+proc gcd int int -- int in
+  abs
+  swap
+  abs
+  swap
+  dup 0 =
+  if
+    drop
+  else
+    peek b a in
+      a b %
+    end
+    rot drop
+    gcd
+  end
+end
+
+// Least common multiple: abs(a / gcd(a, b) * b). Returns 0 when b == 0.
+proc lcm int int -- int in
+  abs
+  swap
+  abs
+  swap
+  dup 0 =
+  if
+    drop drop 0
+  else
+    peek b a in
+      a b gcd
+    end
+    rot swap /
+    *
+  end
+end
+
+// Integer exponentiation. The exponent must be non‑negative.
+proc pow int int -- int in
+  let base exponent in
+    exponent 0 =
+    if
+      1
+    else
+      exponent 1 -
+      base
+      swap
+      pow
+      base
+      *
+    end
+  end
+end
+
+// Factorial for non-negative inputs; returns 0 for negative arguments.
+proc factorial int -- int in
+  dup 0 < if
+    drop 0
+  else
+    dup 1 <= if
+      drop 1
+    else
+      dup 1 -
+      factorial
+      *
+    end
+  end
+end
+
+// Helper used by is-prime -- tests divisors from the current value upward.
+proc is-prime-step int int -- bool in
+  peek n divisor in
+    divisor
+    divisor
+    *
+    n
+    >
+  end
+  if
+    drop drop true
+  else
+    peek n divisor in
+      n
+      divisor
+      %
+      0
+      =
+    end
+    if
+      drop drop false
+    else
+      swap
+      divisor 1 +
+      swap
+      is-prime-step
+    end
+  end
+end
+
+// Primitive primality test (true for 2, false for n < 2). Relies on trial
+// division up to sqrt(n).
+proc is-prime int -- bool in
+  dup 2 <
+  if
+    drop false
+  else
+    2 swap
+    is-prime-step
+  end
+end
