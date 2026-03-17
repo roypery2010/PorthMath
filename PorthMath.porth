@@ -98,24 +98,22 @@ proc is-prime-step int int -- bool in
     *
     n
     >
-  end
-  if
-    drop drop true
-  else
-    peek n divisor in
+    if
+      drop drop true
+    else
       n
       divisor
       %
       0
       =
-    end
-    if
-      drop drop false
-    else
-      swap
-      divisor 1 +
-      swap
-      is-prime-step
+      if
+        drop drop false
+      else
+        swap
+        divisor 1 +
+        swap
+        is-prime-step
+      end
     end
   end
 end
